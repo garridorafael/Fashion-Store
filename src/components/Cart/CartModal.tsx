@@ -23,7 +23,7 @@ export function CartModal() {
 
   return (
     <div role="dialog" className="position: fixed flex items-start justify-end w-full h-screen inset-0">
-      <div className="relative w-full max-w-screen-sm p-4 flex flex-col justify-end">
+      <div className="relative w-full max-w-screen-sm flex flex-col p-4 justify-end">
         <div>
           <button type="submit" className="absolute top-2 right-2">X</button>
           <h2>CARRINHO</h2>
