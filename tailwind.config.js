@@ -6,6 +6,7 @@ export default {
       backgroundColor: {
         'gray-100': '#EEEEEE',
       },
+      fontFamily:'Roboto'     
     },
   },
   plugins: [],
