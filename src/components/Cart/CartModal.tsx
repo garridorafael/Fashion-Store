@@ -1,6 +1,6 @@
 import { useState } from 'react';
 // eslint-disable-next-line import/no-cycle
-import { CartModalList } from './CartModalList';
+import { CartModalCard } from './CartModalCard';
 
 export interface IProduct {
   id: number,
@@ -27,7 +27,7 @@ export function CartModal() {
         <div>
           <button type="submit" className="absolute top-2 right-2">X</button>
           <h2>CARRINHO</h2>
-          <CartModalList products={products} />
+          <CartModalCard products={products} />
         </div>
         <p>Total:</p>
       </div>

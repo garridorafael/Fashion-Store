@@ -1,5 +1,5 @@
-import logo from '../../../assets/FAshionSTORE.png';
-import cartImage from '../../../assets/shopping_cart_FILL0_wght400_GRAD0_opsz48 1.png';
+import logo from '../../assets/FASHIONSTORE.svg';
+import cartImage from '../../assets/SHOPPINGCART.svg';
 
 export function Header() {
   return (
