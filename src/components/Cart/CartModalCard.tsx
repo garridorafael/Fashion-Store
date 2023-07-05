@@ -15,7 +15,7 @@ export function CartModalCard({ product }: CartModalCardProps) {
         <img
           src={product.image}
           alt="Imagem do produto"
-          className="rounded-lg"
+          className="rounded-10"
         />
         <div className="flex flex-col justify-between">
           <h3>{product.name}</h3>
