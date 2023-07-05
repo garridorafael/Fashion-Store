@@ -1,3 +1,4 @@
+import { numberToBrl } from '../../Helpers/numberToBrl';
 import removeImg from '../../assets/remove-from-cart.svg';
 
 // eslint-disable-next-line import/no-cycle
@@ -18,12 +19,7 @@ export function CartModalCard({ product }: CartModalCardProps) {
         />
         <div className="flex flex-col justify-between">
           <h3>{product.name}</h3>
-          <p>
-            {product.price.toLocaleString('pt-br', {
-              style: 'currency',
-              currency: 'BRL',
-            })}
-          </p>
+          <p>{numberToBrl(product.price)}</p>
         </div>
       </div>
       <img
