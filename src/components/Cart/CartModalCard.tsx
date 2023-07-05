@@ -1,4 +1,4 @@
-import { numberToBrl } from '../../Helpers/numberToBrl';
+import { numberToBrl } from '../../helpers/numberToBrl';
 import removeImg from '../../assets/remove-from-cart.svg';
 
 // eslint-disable-next-line import/no-cycle
