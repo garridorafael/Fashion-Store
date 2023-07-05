@@ -6,7 +6,10 @@ export default {
       backgroundColor: {
         'gray-100': '#EEEEEE',
       },
-      fontFamily:'Roboto'     
+      fontFamily:{
+        'body':['Roboto'],
+        'heading': ['Oswald']
+      }
     },
   },
   plugins: [],

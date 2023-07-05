@@ -1,7 +1,7 @@
 import React from 'react';
+import { Paragraph } from './components/Paragraph';
 
 function App() {
-  return <p>Hello world</p>;
+  return <Paragraph text="Hello World" />;
 }
-
 export default App;
