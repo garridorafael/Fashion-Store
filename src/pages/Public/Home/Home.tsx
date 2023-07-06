@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Header } from '../../components/Header';
-import { Heading } from '../../components/Heading';
-import { Button } from '../../components/Button';
+import { Header } from '../../../components/Header';
+import { Heading } from '../../../components/Heading';
+import { Button } from '../../../components/Button';
 import imageLogin from '../../assets/login_highlight.png';
-import { IProduct } from '../../components/Cart/CartModal';
+import { IProduct } from '../../../components/Cart/CartModal';
 import { HomeCard } from './HomeCard';
-import { Footer } from '../../components/Footer';
+import { Footer } from '../../../components/Footer';
 
 export default function Home() {
   const [products2, setProducts2] = useState<IProduct[]>([]);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Paragraph } from './components/Paragraph';
-import Home from './pages/Home/Home';
+import Home from './pages/Public/Home/Home';
 
 function App() {
   return (

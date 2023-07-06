@@ -1,6 +1,6 @@
-import { numberToBrl } from '../../helpers/numberToBrl';
-import { IProduct } from '../../components/Cart/CartModal';
-import { Paragraph } from '../../components/Paragraph';
+import { numberToBrl } from '../../../helpers/numberToBrl';
+import { IProduct } from '../../../components/Cart/CartModal';
+import { Paragraph } from '../../../components/Paragraph';
 import cartImage from '../../assets/Group 4.svg';
 
 interface HomeCardProps {
@@ -28,4 +28,4 @@ export function HomeCard({ product }: HomeCardProps) {
       </div>
     </li>
   );
-};
+}
