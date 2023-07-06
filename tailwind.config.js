@@ -34,6 +34,7 @@ export default {
       colors: {
         'custom-gray': 'rgba(217, 217, 217, 0.4)',
       },
+
     },
   },
   plugins: [],
