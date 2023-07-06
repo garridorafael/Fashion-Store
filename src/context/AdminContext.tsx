@@ -2,6 +2,7 @@ import {
   createContext, useState, useCallback, useMemo,
 } from 'react';
 import { api } from '../services/api';
+// eslint-disable-next-line import/no-cycle
 import { IProduct } from '../components/Cart/CartModal';
 
 interface IAdminContext {

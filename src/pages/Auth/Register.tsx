@@ -8,7 +8,7 @@ import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { Footer } from '../../components/Footer';
 import { Paragraph } from '../../components/Paragraph';
-import { useAdmin } from '../../hooks/useAdmin';
+import { useAdmin } from '../../hooks';
 
 const schema = z.object({
   name: z.string().nonempty('O campo Nome é obrigatório.'),
@@ -46,7 +46,7 @@ export default function Register() {
   return (
     <>
       <div className="h-screen max-w-screen-2xl mx-auto">
-        <Header />
+        <Header unprotected />
         <div className="flex w-full gap-10 items-center mt-10 ">
           <div className="w-1/2">
             <img

@@ -1,6 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
 // eslint-disable-next-line import/no-cycle
 import { CartModalCard } from './CartModalCard';
+import { Heading } from '../Heading';
+// eslint-disable-next-line import/no-cycle
+import { useCart } from '../../hooks';
+import { Paragraph } from '../Paragraph';
+import { numberToBrl } from '../../helpers/numberToBrl';
 
 export interface IProduct {
   id: number;
@@ -11,36 +16,73 @@ export interface IProduct {
 }
 
 export function CartModal() {
-  const [products, setProducts] = useState<IProduct[]>([]);
+  const { closeModal, cartProducts } = useCart();
 
-  setProducts([
-    {
-      id: 1,
-      name: 'Blazer Branco Elegante',
-      price: 490,
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin massa metus, tempus nec ex ac, condimentum convallis diam. Donec at nisi lorem. Aliquam non dolor bibendum, venenatis ante ac, lobortis justo. Vestibulum nec pretium mi, eu consequat dolor.',
-      image:
-        'https://res.cloudinary.com/dsbkp5841/image/upload/v1687807062/Rectangle_4_hwrkgf.jpg',
-    },
-  ]);
+  const empty = cartProducts[0] === undefined;
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    const handleOutclick = (event) => {
+      if (modalRef.current === event.target) {
+        closeModal();
+      }
+    };
+
+    window.addEventListener('mousedown', handleOutclick);
+
+    return () => {
+      window.removeEventListener('mousedown', handleOutclick);
+    };
+  }, [closeModal]);
+
+  const buttonRef = useRef(null);
+
+  useEffect(() => {
+    const handleKeydown = (event) => {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeydown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeydown);
+    };
+  }, [closeModal]);
+
+  const totalPrice = cartProducts.reduce((prevVal, currentProd) => prevVal + currentProd.price, 0);
 
   return (
     <div
+      ref={modalRef}
       role="dialog"
-      className="position: fixed flex items-start justify-end w-full h-screen inset-0"
+      className="position: fixed flex justify-center bg-custom-gray items-start w-full h-screen inset-0 sm:justify-end p-4 sm:p-0"
     >
-      <div className="relative w-full max-w-screen-sm flex flex-col p-4 justify-end">
-        <div>
-          <button type="submit" className="absolute top-2 right-2">
-            X
-          </button>
-          <h2>CARRINHO</h2>
-          {products.map((product) => (
-            <CartModalCard product={product} key={product.id} />
-          ))}
-        </div>
-        <p>Total:</p>
+      <div className="relative w-full max-w-screen-sm flex flex-col border-slate-800 border-8 p-4 justify-end bg-white justify-between sm:max-h-1/2">
+        {
+          empty
+            ? <Paragraph text="O carrinho está vazio" />
+            : (
+              <>
+                <div>
+                  <button ref={buttonRef} onClick={closeModal} type="submit" className="absolute top-2 right-2">
+                    X
+                  </button>
+                  <Heading title="CARRINHO" />
+                  <ul className="flex flex-col h-full gap-12 mt-8">
+                    {cartProducts.map((product) => (
+                      <CartModalCard product={product} key={product.id} />
+                    ))}
+                  </ul>
+                </div>
+                <div className="flex gap-1.5">
+                  <p>TOTAL:</p>
+                  <p>{numberToBrl(totalPrice)}</p>
+                </div>
+              </>
+            )
+        }
       </div>
     </div>
   );
