@@ -1,13 +1,14 @@
-import React from 'react';
-import { Paragraph } from './components/Paragraph';
-import Home from './pages/Public/Home/Home';
+import { RouterProvider } from 'react-router-dom';
+import { routes } from './routes';
+import { AdminProvider } from './context/AdminContext';
+import { CartProvider } from './context/CartContext';
 
-function App() {
+export default function App() {
   return (
-    <>
-      <Paragraph text="Hello World" />
-      <Home />
-    </>
+    <AdminProvider>
+      <CartProvider>
+        <RouterProvider router={routes} />
+      </CartProvider>
+    </AdminProvider>
   );
 }
-export default App;

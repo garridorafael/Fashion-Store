@@ -34,7 +34,7 @@ export default function Login() {
   return (
     <>
       <div className="h-screen max-w-screen-2xl mx-auto">
-        <Header />
+        <Header unprotected />
         <div className="flex w-full gap-10 items-center ">
           <div className="w-1/2">
             <img
