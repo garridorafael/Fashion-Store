@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { CartModalCard } from './CartModalCard';
 
 export interface IProduct {
-  id: number;
+  id?: number;
   name: string;
   price: number;
   description: string;

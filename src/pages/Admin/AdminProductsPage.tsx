@@ -1,4 +1,6 @@
-import { useContext } from 'react';
+import {
+  useContext, useEffect, useState,
+} from 'react';
 import { Heading } from '../../components/Heading';
 import logo from '../../assets/FASHIONSTORE.svg';
 import { Paragraph } from '../../components/Paragraph';
@@ -7,16 +9,39 @@ import { Button } from '../../components/Button';
 import addIcon from '../../assets/add_circle_FILL0_wght400_GRAD0_opsz48 1.svg';
 import { AdminContext } from '../../context/AdminContext';
 import { ProductCardAdmin } from '../../components/CardProductAdmin';
+import { RegisterProduct } from '../../components/RegisterModal';
 
 export function AdminProductsPage() {
-  const { products } = useContext(AdminContext);
-  console.log(products);
+  const [isOpen, setIsOpen] = useState(false);
+  const {
+    products, getProducts,
+  } = useContext(AdminContext);
+
+  useEffect(() => {
+    getProducts();
+  }, [getProducts]);
+
+  // const handleDelete = () => {
+  //   if (selectedProduct) {
+  //   deleteProduct(selectedProductid);
+  //   closeModal();
+  //   }
+  //   }
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const onClose = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
       <header className="flex justify-center items-center my-[20px]">
         <img src={logo} alt="Logo da Fashion Store - Escrito FASHION STORE em preto" />
       </header>
-      <div className="h-screen max-w-screen-2xl mx-auto">
+      <div className="max-w-[1200px] mx-auto box-border">
         <nav className="flex gap-3 my-[30px]">
           <Button
             type="button"
@@ -31,7 +56,7 @@ export function AdminProductsPage() {
             title="produtos"
           />
         </nav>
-        <div className="flex justify-between items-center">
+        <div className="flex flex-wrap justify-between items-center mb-5">
           <div>
             <Heading title="produtos" />
             <Paragraph text="Gerencie os produtos do catálogo" className="my-[30px]" />
@@ -42,11 +67,13 @@ export function AdminProductsPage() {
               title="NOVO PRODUTO"
               variant="SOLID"
               type="button"
+              onClick={openModal}
             />
           </div>
+          {isOpen && <RegisterProduct isOpen={isOpen} onClose={onClose} />}
         </div>
-        <main>
-          <ul>
+        <main className="max-h-full">
+          <ul className="flex flex-wrap justify-between gap-6 box-content max-h-full">
             {products.map((product) => (
               <ProductCardAdmin product={product} key={product.id} />
             ))}
