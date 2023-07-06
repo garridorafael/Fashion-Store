@@ -1,13 +1,19 @@
-import { numberToBrl } from '../../../helpers/numberToBrl';
-import { IProduct } from '../../../components/Cart/CartModal';
-import { Paragraph } from '../../../components/Paragraph';
-import cartImage from '../../assets/Group 4.svg';
+import { numberToBrl } from '../helpers/numberToBrl';
+import { IProduct } from './Cart/CartModal';
+import { Paragraph } from './Paragraph';
+import cartImage from '../assets/Group4.svg';
+import { useCart } from '../hooks';
 
 interface HomeCardProps {
   product: IProduct;
 }
 
 export function HomeCard({ product }: HomeCardProps) {
+  const { setCartProducts } = useCart();
+
+  function AddToCart(productCart) {
+    setCartProducts((prevProducts) => [...prevProducts, productCart]);
+  }
   return (
     <li className="flex flex-col justify-between gap-9 w-72 sm:w-20-75">
       <img
@@ -19,10 +25,12 @@ export function HomeCard({ product }: HomeCardProps) {
         <h3>{product.name}</h3>
         <p>{numberToBrl(product.price)}</p>
         <div className="flex justify-between items-center">
-          <img
-            src={cartImage}
-            alt="Imagem desenho animado carrinho de compras"
-          />
+          <button onClick={() => AddToCart(product)}>
+            <img
+              src={cartImage}
+              alt="Imagem desenho animado carrinho de compras"
+            />
+          </button>
           <Paragraph text="Saiba mais" />
         </div>
       </div>

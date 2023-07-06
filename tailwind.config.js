@@ -31,7 +31,9 @@ export default {
       height: {
         '23-9375': '23.9375rem',
       },
-
+      colors: {
+        'custom-gray': 'rgba(217, 217, 217, 0.4)',
+      },
     },
   },
   plugins: [],
