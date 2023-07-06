@@ -2,26 +2,24 @@ import { BsTrash3 } from 'react-icons/bs';
 import { MdOutlineModeEditOutline } from 'react-icons/md';
 
 interface CardAdminProps {
-  productImage: string;
-  productDescription: string;
-  productName: string;
-  productPrice: string;
+  product: {
+    image: string;
+    description: string;
+    name: string;
+    price: number;
+    id: number;
+  };
 }
 
-export function ProductCardAdmin({
-  productImage,
-  productDescription,
-  productName,
-  productPrice,
-}: CardAdminProps) {
+export function ProductCardAdmin({ product }: CardAdminProps) {
   return (
     <li>
       <div>
-        <img src={productImage} alt={productDescription} />
+        <img src={product.image} alt={product.description} />
       </div>
       <div>
-        <span>{productName}</span>
-        <span>{productPrice}</span>
+        <span>{product.name}</span>
+        <span>{product.price}</span>
       </div>
       <div>
         <button>

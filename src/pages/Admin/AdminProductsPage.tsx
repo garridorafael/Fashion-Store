@@ -1,12 +1,16 @@
+import { useContext } from 'react';
 import { Heading } from '../../components/Heading';
 import logo from '../../assets/FASHIONSTORE.svg';
 import { Paragraph } from '../../components/Paragraph';
 import { Footer } from '../../components/Footer';
 import { Button } from '../../components/Button';
 import addIcon from '../../assets/add_circle_FILL0_wght400_GRAD0_opsz48 1.svg';
-// import { ProductCardAdmin } from '../../components/CardProductAdmin';
+import { AdminContext } from '../../context/AdminContext';
+import { ProductCardAdmin } from '../../components/CardProductAdmin';
 
-export function AdminPage() {
+export function AdminProductsPage() {
+  const { products } = useContext(AdminContext);
+  console.log(products);
   return (
     <>
       <header className="flex justify-center items-center my-[20px]">
@@ -43,11 +47,13 @@ export function AdminPage() {
         </div>
         <main>
           <ul>
-            {/* <ProductCardAdmin /> */}
+            {products.map((product) => (
+              <ProductCardAdmin product={product} key={product.id} />
+            ))}
           </ul>
         </main>
-        <Footer />
       </div>
+      <Footer />
     </>
   );
 }
