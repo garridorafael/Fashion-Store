@@ -41,6 +41,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
   const login = useCallback(async (data: LoginData) => {
     const response = await api.post('/login', data);
     setUser(response.data.user);
+    api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
   }, []);
 
   const register = useCallback(async (data: RegisterData) => {
