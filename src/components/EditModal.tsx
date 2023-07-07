@@ -3,7 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import addIcon from '../assets/add_circle_FILL0_wght400_GRAD0_opsz48 1.svg';
@@ -38,8 +38,17 @@ export function EditProduct({ isOpen, onClose, product }: IModalProps & { produc
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<TechSchemaType>({ resolver: zodResolver(productSchema) });
 
+  useEffect(() => {
+    if (product) {
+      setValue('name', product.name);
+      setValue('price', product.price);
+      setValue('image', product.image);
+      setValue('description', product.description);
+    }
+  }, [product, setValue]);
   if (!isOpen) return null;
 
   async function onSubmit(data: TechSchemaType) {
