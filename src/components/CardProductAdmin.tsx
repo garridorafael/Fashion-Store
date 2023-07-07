@@ -1,7 +1,9 @@
+import { useContext, useState } from 'react';
 import { BsTrash3 } from 'react-icons/bs';
 import { MdOutlineModeEditOutline } from 'react-icons/md';
-import { useState } from 'react';
 import { EditProduct } from './EditModal';
+import { IProduct } from './Cart/CartModal';
+import { AdminContext } from '../context/AdminContext';
 
 interface CardAdminProps {
   product: {
@@ -14,24 +16,29 @@ interface CardAdminProps {
 }
 
 export function ProductCardAdmin({ product }: CardAdminProps) {
+  const { deleteProduct } = useContext(AdminContext);
   const [isOpen, setIsOpen] = useState(false);
-  // const [selectedProduct, setSelectedProduct] = useState<{
-  //   image: string;
-  //   description: string;
-  //   name: string;
-  //   price: number;
-  //   id?: number | undefined;
-  // } | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<IProduct | undefined>(undefined);
 
-  const openEditModal = () => {
-    if (product) {
-      // setSelectedProduct(product);
+  const openEditModal = (productEdit: IProduct) => {
+    if (productEdit) {
+      const productWithId = { ...productEdit, id: product.id };
+      setSelectedProduct(productWithId);
       setIsOpen(true);
     }
   };
 
   const onClose = () => {
     setIsOpen(false);
+  };
+
+  const handleDelete = (productDelete: IProduct) => {
+    setSelectedProduct(productDelete);
+    if (selectedProduct && selectedProduct.id) {
+      // eslint-disable-next-line no-restricted-globals, no-alert
+      confirm('Deseja excluir esse produto?');
+      deleteProduct(selectedProduct.id);
+    }
   };
   return (
     <li className="h-[210px] max-w-[650px] flex flex-row grow justify-between items-center">
@@ -44,13 +51,14 @@ export function ProductCardAdmin({ product }: CardAdminProps) {
         </div>
       </div>
       <div className="flex gap-5 items-center">
-        <button>
+        <button onClick={() => handleDelete(product)}>
           <BsTrash3 />
         </button>
-        <button onClick={openEditModal}>
+        <button onClick={() => product && openEditModal(product)}>
           <MdOutlineModeEditOutline />
         </button>
-        {isOpen && <EditProduct isOpen={isOpen} onClose={onClose} />}
+
+        {isOpen && <EditProduct isOpen={isOpen} onClose={onClose} product={selectedProduct} />}
       </div>
     </li>
   );
