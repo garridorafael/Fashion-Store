@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Header } from '../../../components/Header';
 import { Heading } from '../../../components/Heading';
 import { Button } from '../../../components/Button';
-import { MainImg } from '../../../components/MainImg';
+import { ImgComponent } from '../../../components/ImgComponent';
 import { IProduct } from '../../../components/Cart/CartModal';
 import { HomeCard } from './HomeCard';
 import { Footer } from '../../../components/Footer';
@@ -38,11 +38,14 @@ export default function Home() {
     ]);
   }, []);
 
+  const imgUrl = 'https://github.com/grupo6-tsunode/fashion-store/blob/main/src/assets/login_highlight.png?raw=true';
+  const altText = 'Girls wearing clothing';
+
   return (
     <>
       <Header />
       <div className="flex flex-col w-full gap-x-10 items-center mb-24 mt-8 sm:flex-row sm:mx-36 sm:gap-0 sm:justify-start items-start sm:gap-16">
-        <MainImg />
+        <ImgComponent src={imgUrl} alt={altText} />
         <div className="flex flex-col w-full space-y-2-375 items-center mx-6 sm:mx-0 sm:items-start">
           <Heading title="KENZIE FASHION STORE" />
           <Button
