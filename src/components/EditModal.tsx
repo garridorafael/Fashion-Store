@@ -15,14 +15,11 @@ import { TextArea } from './TextArea';
 interface IModalProps {
   isOpen: boolean;
   onClose: () => void;
+  product?: IProduct;
 }
 
-export interface IproductEditModal {
-  name: string;
-  price: number;
-  image: number;
-  description: string;
-  id:number;
+export interface IproductEditModal extends IProduct {
+  id: number;
 }
 
 const productSchema = z.object({
@@ -34,7 +31,7 @@ const productSchema = z.object({
 
 type TechSchemaType = z.infer<typeof productSchema>;
 
-export function EditProduct({ isOpen, onClose }: IModalProps) {
+export function EditProduct({ isOpen, onClose, product }: IModalProps & { product?: IProduct }) {
   const { editProduct } = useContext(AdminContext);
   const {
     register,
@@ -44,9 +41,9 @@ export function EditProduct({ isOpen, onClose }: IModalProps) {
 
   if (!isOpen) return null;
 
-  async function onSubmit(data: IProduct) {
-    if (data.id) {
-      await editProduct(data.id, data);
+  async function onSubmit() {
+    if (product && product.id) {
+      await editProduct(product.id, product);
       onClose();
     }
   }
