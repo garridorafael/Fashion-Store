@@ -1,7 +1,14 @@
-import { AdminProductsPage } from './pages/Admin/AdminProductsPage';
+import { RouterProvider } from 'react-router-dom';
+import { routes } from './routes';
+import { AdminProvider } from './context/AdminContext';
+import { CartProvider } from './context/CartContext';
 
-function App() {
-  return <AdminProductsPage />;
+export default function App() {
+  return (
+    <AdminProvider>
+      <CartProvider>
+        <RouterProvider router={routes} />
+      </CartProvider>
+    </AdminProvider>
+  );
 }
-
-export default App;

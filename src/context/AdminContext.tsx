@@ -2,6 +2,7 @@ import {
   createContext, useState, useCallback, useMemo,
 } from 'react';
 import { api } from '../services/api';
+// eslint-disable-next-line import/no-cycle
 import { IProduct } from '../components/Cart/CartModal';
 
 interface IAdminContext {
@@ -41,6 +42,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
   const login = useCallback(async (data: LoginData) => {
     const response = await api.post('/login', data);
     setUser(response.data.user);
+    api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
   }, []);
 
   const register = useCallback(async (data: RegisterData) => {
