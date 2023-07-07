@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -7,7 +9,7 @@ import { Heading } from '../../components/Heading';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { Footer } from '../../components/Footer';
-import { useAdmin } from '../../hooks/useAdmin';
+import { AdminContext } from '../../context/AdminContext';
 
 const schema = z.object({
   email: z.string().email('Insira um e-mail válido.'),
@@ -15,7 +17,8 @@ const schema = z.object({
 });
 
 export default function Login() {
-  const { login } = useAdmin();
+  const { login } = useContext(AdminContext);
+  const navigate = useNavigate();
 
   type LoginSchemaType = z.infer<typeof schema>;
 
@@ -29,6 +32,7 @@ export default function Login() {
 
   const onSubmit = async (data: LoginSchemaType) => {
     await login(data);
+    navigate('/admin');
   };
 
   return (
@@ -72,6 +76,7 @@ export default function Login() {
                 type="button"
                 title="CADASTRE-SE"
                 variant="OUTLINE"
+                onClick={() => navigate('/register')}
               />
             </div>
           </form>

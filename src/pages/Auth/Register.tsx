@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -28,6 +29,7 @@ const schema = z.object({
 
 export default function Register() {
   const { register: registerUser } = useAdmin();
+  const navigate = useNavigate();
 
   type RegisterSchemaType = z.infer<typeof schema>;
 
@@ -41,6 +43,7 @@ export default function Register() {
 
   const onSubmit = async ({ name, email, password }: RegisterSchemaType) => {
     await registerUser({ name, email, password });
+    navigate('/login');
   };
 
   return (
