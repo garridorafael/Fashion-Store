@@ -7,7 +7,7 @@ import { Heading } from '../../components/Heading';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { Footer } from '../../components/Footer';
-import { useAdmin } from '../../hooks/useAdmin';
+import { useAdmin } from '../../hooks/index';
 
 const schema = z.object({
   email: z.string().email('Insira um e-mail válido.'),

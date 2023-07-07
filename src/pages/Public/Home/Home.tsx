@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Header } from '../../../components/Header';
 import { Heading } from '../../../components/Heading';
 import { Button } from '../../../components/Button';
-import imageLogin from '../../assets/login_highlight.png';
+import { MainImg } from '../../../components/MainImg';
 import { IProduct } from '../../../components/Cart/CartModal';
 import { HomeCard } from './HomeCard';
 import { Footer } from '../../../components/Footer';
@@ -42,11 +42,7 @@ export default function Home() {
     <>
       <Header />
       <div className="flex flex-col w-full gap-x-10 items-center mb-24 mt-8 sm:flex-row sm:mx-36 sm:gap-0 sm:justify-start items-start sm:gap-16">
-        <img
-          src={imageLogin}
-          className="w-21-375 h-18-875 mx-6 sm:w-59-0625 sm:h-143-1875 sm:gap-0 sm:mx-0"
-          alt="Imagem de uma mulher usando um blazer branco"
-        />
+        <MainImg />
         <div className="flex flex-col w-full space-y-2-375 items-center mx-6 sm:mx-0 sm:items-start">
           <Heading title="KENZIE FASHION STORE" />
           <Button
