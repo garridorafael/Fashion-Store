@@ -10,7 +10,7 @@ import { Heading } from '../../components/Heading';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { Footer } from '../../components/Footer';
-import { AdminContext } from '../../context/AdminContext';
+import { useAdmin } from '../../hooks/index';
 
 const schema = z.object({
   email: z.string().email('Insira um e-mail válido.'),
@@ -18,7 +18,7 @@ const schema = z.object({
 });
 
 export default function Login() {
-  const { login } = useContext(AdminContext);
+  const { login } = useAdmin;
   const navigate = useNavigate();
 
   type LoginSchemaType = z.infer<typeof schema>;
