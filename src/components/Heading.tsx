@@ -3,5 +3,5 @@ interface HeadingProps {
 }
 
 export function Heading({ title }: HeadingProps) {
-  return <h2 className="text-6xl font-medium font-heading uppercase">{title}</h2>;
+  return <h2 className="text-6xl mobile:text-4xl font-medium font-heading uppercase">{title}</h2>;
 }

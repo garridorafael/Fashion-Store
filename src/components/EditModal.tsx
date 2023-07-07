@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useContext } from 'react';
 import { FaTimes } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 import addIcon from '../assets/add_circle_FILL0_wght400_GRAD0_opsz48 1.svg';
 import { AdminContext } from '../context/AdminContext';
 import { IProduct } from './Cart/CartModal';
@@ -41,10 +42,34 @@ export function EditProduct({ isOpen, onClose, product }: IModalProps & { produc
 
   if (!isOpen) return null;
 
-  async function onSubmit() {
+  async function onSubmit(data: TechSchemaType) {
     if (product && product.id) {
-      await editProduct(product.id, product);
-      onClose();
+      try {
+        const updatedProduct: IProduct = {
+          ...product,
+          name: data.name,
+          price: data.price,
+          image: data.image,
+          description: data.description,
+        };
+
+        await editProduct(product.id, updatedProduct);
+        onClose();
+
+        toast.success('Produto editado com sucesso!', {
+          style: {
+            background: '#333',
+            color: '#fff',
+          },
+        });
+      } catch (error) {
+        toast.error('Ocorreu um erro ao editar o produto.', {
+          style: {
+            background: '#333',
+            color: '#fff',
+          },
+        });
+      }
     }
   }
 

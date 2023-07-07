@@ -1,6 +1,7 @@
 import {
   useContext, useEffect, useState,
 } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Heading } from '../../components/Heading';
 import logo from '../../assets/FASHIONSTORE.svg';
 import { Paragraph } from '../../components/Paragraph';
@@ -13,6 +14,7 @@ import { RegisterProduct } from '../../components/RegisterModal';
 
 export function AdminProductsPage() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
   const {
     products, getProducts,
   } = useContext(AdminContext);
@@ -20,13 +22,6 @@ export function AdminProductsPage() {
   useEffect(() => {
     getProducts();
   }, [getProducts]);
-
-  // const handleDelete = () => {
-  //   if (selectedProduct) {
-  //   deleteProduct(selectedProductid);
-  //   closeModal();
-  //   }
-  //   }
 
   const openModal = () => {
     setIsOpen(true);
@@ -41,19 +36,21 @@ export function AdminProductsPage() {
       <header className="flex justify-center items-center my-[20px]">
         <img src={logo} alt="Logo da Fashion Store - Escrito FASHION STORE em preto" />
       </header>
-      <div className="max-w-[1200px] mx-auto box-border">
+      <div className="container px-4 max-w-[1200px] mx-auto box-border">
         <nav className="flex gap-3 my-[30px]">
           <Button
             type="button"
             variant="OUTLINE"
-            className="text-xl leading-8 font-heading uppercase font-medium border-none px-0"
+            className="text-xl leading-8 font-heading uppercase font-medium border-none pl-0"
             title="inicio"
+            onClick={() => navigate('/admin')}
           />
           <Button
             type="button"
             variant="OUTLINE"
             className="text-xl leading-8 font-heading uppercase font-medium border-none px-0"
             title="produtos"
+            onClick={() => navigate('/adminProducts')}
           />
         </nav>
         <div className="flex flex-wrap justify-between items-center mb-5">

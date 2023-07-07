@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useContext } from 'react';
 import { FaTimes } from 'react-icons/fa';
+import { toast } from 'react-hot-toast';
 import addIcon from '../assets/add_circle_FILL0_wght400_GRAD0_opsz48 1.svg';
 import { AdminContext } from '../context/AdminContext';
 import { IProduct } from './Cart/CartModal';
@@ -44,8 +45,23 @@ export function RegisterProduct({ isOpen, onClose }: IModalProps) {
   if (!isOpen) return null;
 
   async function onSubmit(data: IProduct) {
-    await addProduct(data);
-    onClose();
+    try {
+      await addProduct(data);
+      toast.success('Produto adicionado com sucesso', {
+        style: {
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      onClose();
+    } catch (error) {
+      toast.error('Ocorreu um erro ao adicionar o produto.', {
+        style: {
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    }
   }
 
   function onContainerClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {

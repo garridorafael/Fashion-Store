@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import toast from 'react-hot-toast';
 import { Header } from '../../components/Header';
 import imageRegister from '../../assets/register_highlight.png';
 import { Heading } from '../../components/Heading';
@@ -42,8 +43,25 @@ export default function Register() {
   });
 
   const onSubmit = async ({ name, email, password }: RegisterSchemaType) => {
-    await registerUser({ name, email, password });
-    navigate('/login');
+    try {
+      await registerUser({ name, email, password });
+      toast.success('Usuário cadastrado com sucesso!', {
+        style: {
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      navigate('/login');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error:any) {
+      const errorMessage: string = error.message;
+      toast.error(errorMessage, {
+        style: {
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    }
   };
 
   return (
@@ -57,12 +75,8 @@ export default function Register() {
               alt="Imagem de uma mulher usando um blazer branco"
             />
           </div>
-          <form
-            onSubmit={() => {
-              handleSubmit(onSubmit);
-            }}
-            className="w-1/2 flex flex-col gap-4 max-w-lg"
-          >
+          <form onSubmit={handleSubmit(onSubmit)} className="w-1/2 flex flex-col gap-4 max-w-lg">
+
             <Heading title="CADASTRAR-SE" />
             <Paragraph text="Seja bem vindo, administrador" />
             <Input
@@ -102,6 +116,7 @@ export default function Register() {
           </form>
         </div>
       </div>
+      <div />
       <Footer />
     </>
   );
