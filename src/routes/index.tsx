@@ -2,6 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import Login from '../pages/Auth/Login';
 import Register from '../pages/Auth/Register';
 import Home from '../pages/Public/Home';
+import { AdminPage } from '../pages/Admin/AdminPage';
+import { AdminProductsPage } from '../pages/Admin/AdminProductsPage';
 
 export const routes = createBrowserRouter([
   {
@@ -15,5 +17,13 @@ export const routes = createBrowserRouter([
   {
     path: '/',
     element: <Home />,
+  },
+  {
+    path: '/admin',
+    element: <AdminPage />,
+  },
+  {
+    path: '/adminProducts',
+    element: <AdminProductsPage />,
   },
 ]);

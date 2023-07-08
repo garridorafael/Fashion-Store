@@ -8,7 +8,7 @@ import { Paragraph } from '../Paragraph';
 import { numberToBrl } from '../../helpers/numberToBrl';
 
 export interface IProduct {
-  id: number;
+  id?: number;
   name: string;
   price: number;
   description: string;
@@ -22,7 +22,8 @@ export function CartModal() {
   const modalRef = useRef(null);
 
   useEffect(() => {
-    const handleOutclick = (event) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleOutclick = (event: any) => {
       if (modalRef.current === event.target) {
         closeModal();
       }
@@ -38,7 +39,8 @@ export function CartModal() {
   const buttonRef = useRef(null);
 
   useEffect(() => {
-    const handleKeydown = (event) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleKeydown = (event: any) => {
       if (event.key === 'Escape') {
         closeModal();
       }
