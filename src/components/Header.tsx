@@ -3,7 +3,7 @@ import cartImage from '../assets/SHOPPINGCART.svg';
 import { useCart } from '../hooks';
 
 interface IUnprotected {
-  unprotected: boolean;
+  unprotected?: boolean;
 }
 
 export function Header({ unprotected }: IUnprotected) {

@@ -1,6 +1,6 @@
 interface ImgComponentProps {
   src: string;
-  className: string;
+  className?: string;
   alt: string;
 }
 
