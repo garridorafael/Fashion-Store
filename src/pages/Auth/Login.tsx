@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -18,7 +17,7 @@ const schema = z.object({
 });
 
 export default function Login() {
-  const { login } = useAdmin;
+  const { login } = useAdmin();
   const navigate = useNavigate();
 
   type LoginSchemaType = z.infer<typeof schema>;
