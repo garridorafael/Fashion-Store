@@ -19,28 +19,26 @@ export function CartModal() {
   const { closeModal, cartProducts } = useCart();
 
   const empty = cartProducts[0] === undefined;
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleOutclick = (event: any) => {
+    const handleOutclick = (event: MouseEvent) => {
       if (modalRef.current === event.target) {
         closeModal();
       }
     };
 
-    window.addEventListener('mousedown', handleOutclick);
+    window.addEventListener('mousedown', handleOutclick as EventListener);
 
     return () => {
-      window.removeEventListener('mousedown', handleOutclick);
+      window.removeEventListener('mousedown', handleOutclick as EventListener);
     };
   }, [closeModal]);
 
-  const buttonRef = useRef(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleKeydown = (event: any) => {
+    const handleKeydown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         closeModal();
       }
@@ -72,7 +70,7 @@ export function CartModal() {
                     X
                   </button>
                   <Heading title="CARRINHO" />
-                  <ul className="flex flex-col h-full gap-12 mt-8">
+                  <ul className="flex flex-col h-full gap-12 mt-8 max-h-full overflow-y-auto whitespace-nowrap">
                     {cartProducts.map((product) => (
                       <CartModalCard product={product} key={product.id} />
                     ))}

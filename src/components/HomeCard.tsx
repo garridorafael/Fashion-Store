@@ -12,7 +12,7 @@ interface HomeCardProps {
 export function HomeCard({ product }: HomeCardProps) {
   const { setCartProducts } = useCart();
 
-  function AddToCart(productCart : IProduct) {
+  function AddToCart(productCart: IProduct) {
     setCartProducts((prevProducts) => [...prevProducts, productCart]);
   }
   return (
