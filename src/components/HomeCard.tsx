@@ -1,3 +1,4 @@
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { numberToBrl } from '../helpers/numberToBrl';
 import { IProduct } from './Cart/CartModal';
@@ -14,6 +15,7 @@ export function HomeCard({ product }: HomeCardProps) {
 
   function AddToCart(productCart: IProduct) {
     setCartProducts((prevProducts) => [...prevProducts, productCart]);
+    toast.success('O produto foi adicionado ao carrinho');
   }
   return (
     <li className="flex flex-col justify-between gap-9 w-72 sm:w-20-75">
