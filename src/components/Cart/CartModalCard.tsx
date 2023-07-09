@@ -1,3 +1,4 @@
+import { toast } from 'react-hot-toast';
 import { numberToBrl } from '../../helpers/numberToBrl';
 import removeImg from '../../assets/remove-from-cart.svg';
 // eslint-disable-next-line import/no-cycle
@@ -18,6 +19,7 @@ export function CartModalCard({ product }: CartModalCardProps) {
     }
     const newCartProducts = cartProducts.filter((cartProduct) => cartProduct.id !== id);
     setCartProducts(newCartProducts);
+    toast.success('O produto foi removido com sucesso');
   }
   return (
     <li className="flex justify-between items-center">
