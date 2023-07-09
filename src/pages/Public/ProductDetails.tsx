@@ -1,28 +1,30 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Header } from './Header';
-import { Footer } from './Footer';
-import { HomeCard } from './HomeCard';
-import { useCart } from '../hooks';
-import { numberToBrl } from '../helpers/numberToBrl';
-import { ImgComponent } from './ImgComponent';
-import { IProduct } from './Cart/CartModal';
+import { Header } from '../../components/Header';
+import { Footer } from '../../components/Footer';
+import { HomeCard } from '../../components/HomeCard';
+import { useCart } from '../../hooks';
+import { numberToBrl } from '../../helpers/numberToBrl';
+import { ImgComponent } from '../../components/ImgComponent';
+import { IProduct } from '../../components/Cart/CartModal';
 
 export function ProductDetails() {
-  const { id } = useParams();
+  const { id } = useParams<{ id?: string }>();
   const { setCartProducts } = useCart();
-  const [product, setProduct] = useState<IProduct>();
-  const [relatedProducts, setRelatedProducts] = useState([]);
+  const [product, setProduct] = useState<IProduct | null>(null);
+  const [relatedProducts, setRelatedProducts] = useState<IProduct[]>([]);
+  const [fetchError, setFetchError] = useState<string>('');
 
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
-        const response = await fetch(`https://fashion-store-api.onrender.com/products/${id}`);
-        const data = await response.json();
-        setProduct(data);
+        if (id) {
+          const response = await fetch(`https://fashion-store-api.onrender.com/products/${id}`);
+          const data = await response.json();
+          setProduct(data);
+        }
       } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('Erro ao buscar os detalhes do produto:', error);
+        setFetchError('Erro ao buscar os detalhes do produto');
       }
     };
 
@@ -30,11 +32,12 @@ export function ProductDetails() {
       try {
         const response = await fetch('https://fashion-store-api.onrender.com/products');
         const data = await response.json();
-        // eslint-disable-next-line max-len
-        setRelatedProducts(data.filter((relatedProduct: { id: number }) => relatedProduct.id !== parseInt(id, 10)));
+        if (id) {
+          // eslint-disable-next-line max-len
+          setRelatedProducts(data.filter((relatedProduct: { id: number }) => relatedProduct.id !== parseInt(id, 10)));
+        }
       } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('Erro ao buscar os produtos relacionados:', error);
+        setFetchError('Erro ao buscar os produtos relacionados');
       }
     };
 
@@ -46,8 +49,28 @@ export function ProductDetails() {
     setCartProducts((prevProducts) => [...prevProducts, productToAdd]);
   };
 
+  if (fetchError) {
+    return (
+      <>
+        <Header />
+        <div className="container">
+          <p>{fetchError}</p>
+        </div>
+        <Footer />
+      </>
+    );
+  }
+
   if (!product) {
-    return <p>Carregando...</p>;
+    return (
+      <>
+        <Header />
+        <div className="container">
+          <p>Carregando...</p>
+        </div>
+        <Footer />
+      </>
+    );
   }
 
   return (

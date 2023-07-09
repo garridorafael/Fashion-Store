@@ -4,7 +4,7 @@ import Register from '../pages/Auth/Register';
 import Home from '../pages/Public/Home';
 import { AdminPage } from '../pages/Admin/AdminPage';
 import { AdminProductsPage } from '../pages/Admin/AdminProductsPage';
-import { ProductDetails } from '../components/ProductDetails';
+import { ProductDetails } from '../pages/Public/ProductDetails';
 
 export const routes = createBrowserRouter([
   {
