@@ -19,26 +19,26 @@ export function CartModal() {
   const { closeModal, cartProducts } = useCart();
 
   const empty = cartProducts[0] === undefined;
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleOutclick = (event) => {
+    const handleOutclick = (event: MouseEvent) => {
       if (modalRef.current === event.target) {
         closeModal();
       }
     };
 
-    window.addEventListener('mousedown', handleOutclick);
+    window.addEventListener('mousedown', handleOutclick as EventListener);
 
     return () => {
-      window.removeEventListener('mousedown', handleOutclick);
+      window.removeEventListener('mousedown', handleOutclick as EventListener);
     };
   }, [closeModal]);
 
-  const buttonRef = useRef(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const handleKeydown = (event) => {
+    const handleKeydown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         closeModal();
       }
