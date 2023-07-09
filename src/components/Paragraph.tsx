@@ -4,5 +4,5 @@ interface ParagraphProps {
 }
 
 export function Paragraph({ text, className }: ParagraphProps) {
-  return <p className={`text-xl leading-8 ${className}`}>{text}</p>;
+  return <p className={` ${className} text-xl leading-8`}>{text}</p>;
 }

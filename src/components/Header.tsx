@@ -13,7 +13,7 @@ export function Header({ unprotected }: IUnprotected) {
     <header
       className={`${
         unprotected ? 'justify-between' : 'justify-between'
-      } flex items-center mx-6 mt-6 sm:mx-36`}
+      } flex items-center mx-6 mt-6`}
     >
       <img
         src={logo}
