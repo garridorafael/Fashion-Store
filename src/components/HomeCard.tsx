@@ -11,11 +11,11 @@ interface HomeCardProps {
 export function HomeCard({ product }: HomeCardProps) {
   const { setCartProducts } = useCart();
 
-  function AddToCart(productCart : IProduct) {
+  function AddToCart(productCart: IProduct) {
     setCartProducts((prevProducts) => [...prevProducts, productCart]);
   }
   return (
-    <li className="flex flex-col justify-between gap-9 w-72 sm:w-20-75">
+    <li className="flex flex-col p-1 justify-between gap-9 min-w-fit sm:w-20-75 ">
       <img
         src={product.image}
         alt="Imagem do produto"
