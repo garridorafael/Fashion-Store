@@ -70,7 +70,7 @@ export function CartModal() {
                     X
                   </button>
                   <Heading title="CARRINHO" />
-                  <ul className="flex flex-col h-full gap-12 mt-8">
+                  <ul className="flex flex-col h-full gap-12 mt-8 max-h-full overflow-y-auto whitespace-nowrap">
                     {cartProducts.map((product) => (
                       <CartModalCard product={product} key={product.id} />
                     ))}

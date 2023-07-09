@@ -42,7 +42,7 @@ export default function Home() {
       </div>
       <section className="flex flex-col gap-10 mx-6 sm:mx-36">
         <Heading title="PRODUTOS EM DESTAQUE" />
-        <ul className="flex overflow-x gap-x-7 mb-60">
+        <ul className="flex overflow-x gap-x-7 mb-60 max-w-full overflow-x-auto whitespace-nowrap ">
           {products.map((product) => (
             <HomeCard product={product} key={product.id} />
           ))}
