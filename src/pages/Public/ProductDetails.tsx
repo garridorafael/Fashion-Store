@@ -6,11 +6,14 @@ import { HomeCard } from '../../components/HomeCard';
 import { useCart } from '../../hooks';
 import { numberToBrl } from '../../helpers/numberToBrl';
 import { ImgComponent } from '../../components/ImgComponent';
-import { IProduct } from '../../components/Cart/CartModal';
+import { CartModal, IProduct } from '../../components/Cart/CartModal';
+import { Container } from '../../components/Container';
+import { Heading } from '../../components/Heading';
 
 export function ProductDetails() {
   const { id } = useParams<{ id?: string }>();
   const { setCartProducts } = useCart();
+  const { isOpen } = useCart();
   const [product, setProduct] = useState<IProduct | null>(null);
   const [relatedProducts, setRelatedProducts] = useState<IProduct[]>([]);
   const [fetchError, setFetchError] = useState<string>('');
@@ -19,7 +22,9 @@ export function ProductDetails() {
     const fetchProductDetails = async () => {
       try {
         if (id) {
-          const response = await fetch(`https://fashion-store-api.onrender.com/products/${id}`);
+          const response = await fetch(
+            `https://fashion-store-api.onrender.com/products/${id}`,
+          );
           const data = await response.json();
           setProduct(data);
         }
@@ -30,11 +35,16 @@ export function ProductDetails() {
 
     const fetchRelatedProducts = async () => {
       try {
-        const response = await fetch('https://fashion-store-api.onrender.com/products');
+        const response = await fetch(
+          'https://fashion-store-api.onrender.com/products',
+        );
         const data = await response.json();
         if (id) {
-          // eslint-disable-next-line max-len
-          setRelatedProducts(data.filter((relatedProduct: { id: number }) => relatedProduct.id !== parseInt(id, 10)));
+          setRelatedProducts(
+            data.filter(
+              (relatedProduct: { id: number }) => relatedProduct.id !== parseInt(id, 10),
+            ),
+          );
         }
       } catch (error) {
         setFetchError('Erro ao buscar os produtos relacionados');
@@ -75,9 +85,11 @@ export function ProductDetails() {
 
   return (
     <>
-      <Header />
-      <div className="container">
-        <div className="flex items-center justify-center mb-10 mt-10">
+      <Container>
+        {isOpen ? <CartModal /> : null}
+
+        <Header />
+        <div className="flex items-center justify-center  mt-10">
           <Link
             to="/"
             className="text-black flex items-center justify-center font-medium uppercase text-lg font-['Oswald'] w-64 h-7"
@@ -86,16 +98,16 @@ export function ProductDetails() {
             {product.name}
           </Link>
         </div>
-        <div className="flex items-center justify-center gap-10">
-          <div className="product-image">
-            <img src={product.image} alt={product.name} />
+        <div className="flex items-center justify-center mt-4 gap-10 mx-4">
+          <div className="h-[500px]">
+            <img src={product.image} alt={product.name} className="h-full" />
           </div>
-          <div className="product-info flex flex-col justify-center text-left w-96 h-64 gap-4">
+          <div className="flex flex-col justify-center text-left w-96 h-64 gap-4">
             <h2 className="text-base font-bold font-['Roboto'] w-52 h-7">
               {product.name}
             </h2>
-            <p className="text-2xl font-normal font-['Oswald'] w-32 h-12">
-              {product.price ? numberToBrl(product.price) : ''}
+            <p className="text-2xl font-normal font-['Oswald'] w-36 h-12">
+              {numberToBrl(+product.price)}
             </p>
             <p className="text-small font-normal font-['Roboto'] w-96 h-32">
               {product.description}
@@ -117,19 +129,18 @@ export function ProductDetails() {
             </div>
           </div>
         </div>
-        <div className="related-products mt-20">
-          <h3 className="text-6xl mb-10 font-medium uppercase font-['Oswald'] ml-10 w-96 h-16">
-            Veja também
-          </h3>
+        <div className="related-products">
+          <Heading title="Veja também" classname="text-3xl my-10" />
           <div className="w-100">
-            <ul className="flex overflow-x-auto gap-7 ml-10">
+            <ul className="flex overflow-x-auto gap-7">
               {relatedProducts.map((relatedProduct) => (
                 <HomeCard product={relatedProduct} key={relatedProduct.id} />
               ))}
             </ul>
           </div>
         </div>
-      </div>
+      </Container>
+
       <Footer />
     </>
   );

@@ -2,16 +2,14 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    screens: {
-      'mobile': {'max': '470px'},
-    },
+
     extend: {
       backgroundColor: {
         'gray-100': '#EEEEEE',
       },
-      fontFamily:{
-        'body':['Roboto'],
-        'heading': ['Oswald']
+      fontFamily: {
+        body: ['Roboto'],
+        heading: ['Oswald'],
       },
       width: {
         '21-375': '21.375rem',
@@ -37,7 +35,9 @@ export default {
       colors: {
         'custom-gray': 'rgba(217, 217, 217, 0.4)',
       },
-
+      maxWidth: {
+        '9xl': '100rem',
+      },
     },
   },
   plugins: [],

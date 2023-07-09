@@ -1,13 +1,13 @@
 import { useEffect, useContext } from 'react';
 import { Header } from '../../components/Header';
 import { Heading } from '../../components/Heading';
-import { ImgComponent } from '../../components/ImgComponent';
 import { Button } from '../../components/Button';
 import { HomeCard } from '../../components/HomeCard';
 import { Footer } from '../../components/Footer';
 import { AdminContext } from '../../context/AdminContext';
 import { useCart } from '../../hooks';
 import { CartModal } from '../../components/Cart/CartModal';
+import { Container } from '../../components/Container';
 
 export default function Home() {
   const { products, getProducts } = useContext(AdminContext);
@@ -22,23 +22,34 @@ export default function Home() {
 
   return (
     <>
-      <Header unprotected={false} />
-      {isOpen ? <CartModal /> : null}
-      <div className="flex flex-col gap-x-10 items-center mb-24 mt-8 sm:flex-row sm:mx-36 sm:gap-0 sm:justify-between pr-20 items-start ">
-        <ImgComponent src={imgUrl} alt={altText} />
-        <div className="flex flex-col space-y-2-375 items-center mx-6 sm:mx-0 sm:items-start">
-          <Heading title="KENZIE FASHION STORE" />
-          <Button className="py-2" type="submit" title="CONFIRA AS OFERTAS" variant="SOLID" />
+      <Container>
+        <Header unprotected={false} />
+        {isOpen ? <CartModal /> : null}
+        <div className="flex flex-col mx-4 gap-x-14 items-center mt-8 lg:flex-row lg:mb-10 mb-6">
+          <img src={imgUrl} alt={altText} className="max-w-full" />
+          <div className="flex flex-col gap-8 lg:items-start text-center items-center  sm:items-start min-w-screen max-w-prose">
+            <Heading
+              classname="lg:max-w-lg max-w-[200px] lg:text-start text-5xl lg:text-8xl tracking-widest line-clamp-4"
+              title="KENZIE FASHION STORE"
+            />
+            <Button
+              className=" lg:mt-10   py-2"
+              type="submit"
+              title="CONFIRA AS OFERTAS"
+              variant="SOLID"
+            />
+          </div>
         </div>
-      </div>
-      <section className="flex flex-col gap-10 mx-6 sm:mx-36">
-        <Heading title="PRODUTOS EM DESTAQUE" />
-        <ul className="flex overflow-x gap-x-7 mb-60 max-w-full overflow-x-auto whitespace-nowrap ">
-          {products.map((product) => (
-            <HomeCard product={product} key={product.id} />
-          ))}
-        </ul>
-      </section>
+        <section className="flex flex-col gap-10 mx-4">
+          <Heading title="PRODUTOS EM DESTAQUE" />
+          <ul className="flex overflow-x gap-x-7 mb-10 max-w-full overflow-x-auto whitespace-nowrap ">
+            {products.map((product) => (
+              <HomeCard product={product} key={product.id} />
+            ))}
+          </ul>
+        </section>
+      </Container>
+
       <Footer />
     </>
   );
