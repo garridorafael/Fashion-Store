@@ -13,10 +13,10 @@ export function CartModalCard({ product }: CartModalCardProps) {
   const { cartProducts, setCartProducts } = useCart();
 
   function removeFromCart(id: number | undefined) {
-    if (product.id === undefined) return;
-    const newCartProducts = cartProducts.filter(
-      (cartProduct) => cartProduct.id !== id,
-    );
+    if (id === undefined) {
+      return;
+    }
+    const newCartProducts = cartProducts.filter((cartProduct) => cartProduct.id !== id);
     setCartProducts(newCartProducts);
   }
   return (
