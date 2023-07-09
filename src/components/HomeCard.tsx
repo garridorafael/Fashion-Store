@@ -2,7 +2,6 @@ import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { numberToBrl } from '../helpers/numberToBrl';
 import { IProduct } from './Cart/CartModal';
-import { Paragraph } from './Paragraph';
 import cartImage from '../assets/Group4.svg';
 import { useCart } from '../hooks';
 
@@ -18,25 +17,27 @@ export function HomeCard({ product }: HomeCardProps) {
     toast.success('O produto foi adicionado ao carrinho');
   }
   return (
-    <li className="flex flex-col justify-between gap-9 w-72 sm:w-20-75">
+    <li className="flex flex-col justify-between gap-9 lg:w-80 min-w-[220px]">
       <Link to={`/product/${product.id}`}>
         <img
           src={product.image}
           alt="Imagem do produto"
-          className="flex w-full h-2/4 rounded-20 h-80 w-72 sm:w-20-75 sm:h-23-9375"
+          className="flex w-full rounded-20 h-64 lg:h-80"
         />
       </Link>
-      <div className="flex flex-col gap-9 w-9/12">
-        <h3>{product.name}</h3>
-        <p>{numberToBrl(product.price)}</p>
-        <div className="flex justify-between items-center">
+      <div className="flex flex-col gap-4 w-9/12">
+        <h3 className="font-bold">{product.name}</h3>
+        <p className="font-semibold">{numberToBrl(product.price)}</p>
+        <div className="flex gap-6 items-center">
           <button onClick={() => AddToCart(product)}>
             <img
               src={cartImage}
               alt="Imagem desenho animado carrinho de compras"
             />
           </button>
-          <Paragraph text="Saiba mais" />
+          <Link to={`/product/${product.id}`}>
+            <p className="text-start text-sm">SAIBA MAIS</p>
+          </Link>
         </div>
       </div>
     </li>
