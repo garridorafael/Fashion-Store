@@ -1,6 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import toast from 'react-hot-toast';
 import { Header } from '../../components/Header';
 import imageLogin from '../../assets/login_highlight.png';
 import { Heading } from '../../components/Heading';
@@ -16,6 +18,7 @@ const schema = z.object({
 
 export default function Login() {
   const { login } = useAdmin();
+  const navigate = useNavigate();
 
   type LoginSchemaType = z.infer<typeof schema>;
 
@@ -28,7 +31,25 @@ export default function Login() {
   });
 
   const onSubmit = async (data: LoginSchemaType) => {
-    await login(data);
+    try {
+      await login(data);
+      toast.success('Login realizado com sucesso!', {
+        style: {
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      navigate('/admin');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error:any) {
+      const errorMessage: string = error.message;
+      toast.error(errorMessage, {
+        style: {
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    }
   };
 
   return (
@@ -72,6 +93,7 @@ export default function Login() {
                 type="button"
                 title="CADASTRE-SE"
                 variant="OUTLINE"
+                onClick={() => navigate('/register')}
               />
             </div>
           </form>

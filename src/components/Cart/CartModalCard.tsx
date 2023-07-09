@@ -12,7 +12,10 @@ interface CartModalCardProps {
 export function CartModalCard({ product }: CartModalCardProps) {
   const { cartProducts, setCartProducts } = useCart();
 
-  function removeFromCart(id: number) {
+  function removeFromCart(id: number | undefined) {
+    if (id === undefined) {
+      return;
+    }
     const newCartProducts = cartProducts.filter((cartProduct) => cartProduct.id !== id);
     setCartProducts(newCartProducts);
   }
