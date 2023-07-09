@@ -4,6 +4,8 @@ import Register from '../pages/Auth/Register';
 import Home from '../pages/Public/Home';
 import { AdminPage } from '../pages/Admin/AdminPage';
 import { AdminProductsPage } from '../pages/Admin/AdminProductsPage';
+import { ProductDetails } from '../pages/Public/ProductDetails';
+import { AdminRoute } from '../components/security/AdminRoute';
 
 export const routes = createBrowserRouter([
   {
@@ -20,10 +22,22 @@ export const routes = createBrowserRouter([
   },
   {
     path: '/admin',
-    element: <AdminPage />,
+    element: (
+      <AdminRoute>
+        <AdminPage />
+      </AdminRoute>
+    ),
   },
   {
-    path: '/adminProducts',
-    element: <AdminProductsPage />,
+    path: '/admin/products',
+    element: (
+      <AdminRoute>
+        <AdminProductsPage />
+      </AdminRoute>
+    ),
+  },
+  {
+    path: '/product/:id',
+    element: <ProductDetails />,
   },
 ]);
