@@ -1,21 +1,20 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { HomeCard } from '../../components/HomeCard';
-import { useCart } from '../../hooks';
+import { useAdmin, useCart } from '../../hooks';
 import { numberToBrl } from '../../helpers/numberToBrl';
 import { ImgComponent } from '../../components/ImgComponent';
 import { CartModal, IProduct } from '../../components/Cart/CartModal';
 import { Container } from '../../components/Container';
 import { Heading } from '../../components/Heading';
-import { AdminContext } from '../../context/AdminContext'; // import the AdminContext
 
 export function ProductDetails() {
   const { id } = useParams<{ id?: string }>();
   const { setCartProducts } = useCart();
   const { isOpen } = useCart();
-  const { products, getProducts } = useContext(AdminContext); // use the AdminContext
+  const { products, getProducts } = useAdmin();
   const [product, setProduct] = useState<IProduct | null>(null);
   const [relatedProducts, setRelatedProducts] = useState<IProduct[]>([]);
   const [fetchError, setFetchError] = useState<string>('');
@@ -28,7 +27,7 @@ export function ProductDetails() {
         if (id) {
           const foundProduct = products.find(
             (prod) => prod.id === parseInt(id, 10),
-          ); // get the product from the AdminContext
+          );
           if (foundProduct) {
             setProduct(foundProduct);
           }
@@ -55,7 +54,7 @@ export function ProductDetails() {
 
     fetchProductDetails();
     fetchRelatedProducts();
-  }, [id, products, getProducts]); // add getProducts to the dependencies list
+  }, [id, products, getProducts]);
 
   const handleAddToCart = (productToAdd: IProduct) => {
     setCartProducts((prevProducts) => [...prevProducts, productToAdd]);
