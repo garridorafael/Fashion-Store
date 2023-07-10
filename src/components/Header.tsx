@@ -12,8 +12,8 @@ export function Header({ unprotected }: IUnprotected) {
   return (
     <header
       className={`${
-        unprotected ? 'justify-between' : 'justify-between'
-      } flex items-center mx-6 mt-6`}
+        unprotected ? 'justify-center' : 'justify-between'
+      } flex items-center mx-6 my-8`}
     >
       <img
         src={logo}

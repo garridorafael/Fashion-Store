@@ -17,7 +17,9 @@ export function CartModalCard({ product }: CartModalCardProps) {
     if (id === undefined) {
       return;
     }
-    const newCartProducts = cartProducts.filter((cartProduct) => cartProduct.id !== id);
+    const newCartProducts = cartProducts.filter(
+      (cartProduct) => cartProduct.id !== id,
+    );
     setCartProducts(newCartProducts);
     toast.success('O produto foi removido com sucesso');
   }
@@ -34,7 +36,7 @@ export function CartModalCard({ product }: CartModalCardProps) {
           <p>{numberToBrl(product.price)}</p>
         </div>
       </div>
-      <button onClick={() => removeFromCart(product.id)}>
+      <button onClick={() => removeFromCart(product.id)} className="p-4">
         <img
           src={removeImg}
           alt="Traço preto usado para remover produto do carrinho"

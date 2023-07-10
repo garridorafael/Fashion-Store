@@ -40,8 +40,8 @@ export default function Login() {
         },
       });
       navigate('/admin');
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error:any) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       const errorMessage: string = error.message;
       toast.error(errorMessage, {
         style: {
@@ -54,9 +54,9 @@ export default function Login() {
 
   return (
     <>
-      <div className="h-screen max-w-screen-2xl mx-auto">
+      <div className="max-w-screen-2xl mx-auto">
         <Header unprotected />
-        <div className="flex w-full gap-10 items-center ">
+        <div className="flex w-full gap-10 items-center mb-8 ">
           <div className="w-1/2">
             <img
               src={imageLogin}

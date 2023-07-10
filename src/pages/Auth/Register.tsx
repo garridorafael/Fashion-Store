@@ -66,9 +66,9 @@ export default function Register() {
 
   return (
     <>
-      <div className="h-screen max-w-screen-2xl mx-auto">
+      <div className="max-w-screen-2xl mx-auto">
         <Header unprotected />
-        <div className="flex w-full gap-10 items-center mt-10 ">
+        <div className="flex w-full gap-10 items-center mt-10 mb-6">
           <div className="w-1/2">
             <img
               src={imageRegister}
