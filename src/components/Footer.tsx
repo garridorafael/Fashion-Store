@@ -4,7 +4,7 @@ interface FooterProps {
 export function Footer({ className }: FooterProps) {
   return (
     <footer
-      className={`${className} w-screen bg-black py-16 bottom-0 mb-0 mt-6`}
+      className={`${className} w-screen bg-black py-16 bottom-0 `}
     >
       <div className="flex justify-center items-center h-full box-content w-screen">
         <h3 className="text-white text-center text-lg font-bold mobile:text-base">
