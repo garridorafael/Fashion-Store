@@ -1,3 +1,8 @@
+<div>
+  Projeto desenvolvido em grupo durante o curso da Kenzie Academy Brasil.
+  <p>Nesse projeto fiquei responsável pela criação da página do Admin e suas funcionalidades</p>
+</div>
+
 # 🛍️ FashionStore 🛍️
 
 Este é um projeto de e-commerce com foco em moda e acessórios, onde implementamos uma loja virtual completa com recursos de administrador. Utilizamos a API Fashion Store para gerenciar os produtos e contas de usuário.
