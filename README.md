@@ -69,4 +69,4 @@ Os usuários devem ser capazes de fazer login com o e-mail e a senha registrados
 Na tela de administração, os produtos cadastrados são listados, com opções para remover, editar e adicionar novos produtos.
 
 
-Projeto desenvolvido com 💜 por Grupo6 kkkkk 👋
+Projeto desenvolvido com 💜 por Grupo 6 kkkkk 👋
